@@ -7,8 +7,8 @@
 <!-- 		        <a :href='xref_conf[""+sub_res.domain_id].url.replace("£{id}",sub_res.identifier)' target='_blank'><i class="fas fa-external-link-alt fa-1x"></i></a>  -->
 		        <a  class="actionIcon icon" title="Remove" v-show="sub_res.depth>0" @click="removeXref(sub_res,parent_sub_res)"><i class="fas fa-trash-alt"></i></a>
 		        <a  title="Filter" v-show="sub_res.showResults" class="actionIcon icon" @click="sub_res.filterModalActive=true"><i class="fas fa-filter fa-1x" style="position:relative;top:2px"></i></a>
-			    <a  class="actionIcon icon" title="Show results"  @click="hideResults(sub_res)" v-show="sub_res.showResults"><i class="fas fa-eye-slash"></i></a>
-			    <a  class="actionIcon icon" title="Hide results"  @click="showResults(sub_res)" v-show="!sub_res.showResults"><i class="fas fa-eye"></i></a>
+			    <a  class="actionIcon icon" title="Hide results"  @click="hideResults(sub_res)" v-show="sub_res.showResults"><i class="fas fa-eye-slash"></i></a>
+			    <a  class="actionIcon icon" title="Show results"  @click="showResults(sub_res)" v-show="!sub_res.showResults"><i class="fas fa-eye"></i></a>
 			    <a  class="actionIcon icon" title="Show selection list"  @click="sub_res.treeModal=true" v-show="!parent_sub_res"><i class="fas fa-list-ul"></i></a>
 
 			</div>
