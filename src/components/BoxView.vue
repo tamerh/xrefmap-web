@@ -225,12 +225,10 @@ export default {
       
       },
       previousPage(sub_result){
-          //TODO make button loding 
           sub_result.clientPage =sub_result.clientPage-1;
           this.setDisplayEntries(sub_result);
       },
       nextPage(sub_result){
-          //TODO make button loding 
           sub_result.clientPage =sub_result.clientPage+1; 
           this.setDisplayEntries(sub_result);
       },

@@ -678,7 +678,7 @@ var XrefConf = {
     str_id: 'brenda',
     name: 'Brenda',
     cat_id: '5',
-    url: 'http://brenda-enzymes.org/ligand.php?brenda_ligand_id=£{id}'
+    url: 'http://brenda-enzymes.org/enzyme.php?ecno=£{id}'
   },
   '122': {
     str_id: 'uberon',
