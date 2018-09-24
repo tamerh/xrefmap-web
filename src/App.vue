@@ -163,7 +163,7 @@
 <footer>
   <div class="content has-text-left">
     <p>
-      Copyright © EMBL-EBI 2018      
+      Copyright © EMBL-EBI 2018 | Last Data Update : September 2018
     </p>
   </div>
 </footer>
