@@ -151,7 +151,7 @@
 		
 		<div  v-for="(sub_res,index) in $root.$data.model.all_sub_results" :class="resultDivClass(index)">
 		  <div class="resultContainer container is-fullhd">
-					<box-view :sub_res="sub_res" :xref_conf="$root.$data.xref_conf" :app_conf="$root.$data.app_conf"></box-view>
+					<box-view :mobile="mobile" :sub_res="sub_res" :xref_conf="$root.$data.xref_conf" :app_conf="$root.$data.app_conf"></box-view>
 		  </div>	 
 		</div>
 
@@ -161,9 +161,9 @@
 </main>
 
 <footer>
-  <div class="content has-text-left">
+  <div class="content has-text-left is-size-6">
     <p>
-      Copyright © EMBL-EBI 2018 | Last Data Update : September 2018
+      Last update date: September 2018
     </p>
   </div>
 </footer>
@@ -199,7 +199,8 @@ export default {
       mainPageActive:true,
       topSearchBoxSize:70,
       burgerBarActive:false,
-      searchPlaceHolder:'Search identifier,accession, hgnc gene symbol or alias or species name seperated by comma'
+      searchPlaceHolder:'Search identifier,accession, hgnc gene symbol or alias or species name seperated by comma',
+      mobile:false
     }
   },
   methods: {
@@ -339,6 +340,7 @@ export default {
           this.$root.$data.app_conf.page_size=9;
           this.$root.$data.app_conf.page_size_new=9;
           this.searchPlaceHolder='Search';
+          this.mobile=true;
           
       }else if (window.innerWidth<=1500){
           this.topSearchBoxSize=40;

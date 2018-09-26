@@ -1,5 +1,5 @@
 <template>
-<div :class="{'resultBox':true,'resultBoxFirst': !parent_sub_res }">
+<div :class="{'resultBox':!mobile,'resultBoxFirst': !parent_sub_res }">
 
 			<div class="legend">			
 		       <template v-if="sub_res.showResults"> &nbsp; {{ sub_res.count.toLocaleString()}} Results for </template>
@@ -67,7 +67,7 @@
 		
 		<transition-group name="list" tag="div">
 		<div v-for="(sel_sub_res ,index) in sub_res.selectedXrefs" style="margin-top:10px" :key="sel_sub_res.identifier" >
-			<box-view :parent_sub_res="sub_res" :sub_res="sel_sub_res" :xref_conf="$root.$data.xref_conf" :app_conf="$root.$data.app_conf"></box-view>   
+			<box-view :mobile="mobile" :parent_sub_res="sub_res" :sub_res="sel_sub_res" :xref_conf="$root.$data.xref_conf" :app_conf="$root.$data.app_conf"></box-view>   
 		</div>
 	
 		</transition-group>
@@ -119,7 +119,11 @@ export default {
       app_conf: {
           type: Object,
           required: true
-        }
+        },
+        mobile: {
+            type: Boolean,
+            required: true
+          } 
   },
   data () {
     return {
