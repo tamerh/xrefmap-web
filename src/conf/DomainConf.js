@@ -34,22 +34,19 @@ var XrefConf = {
     str_id: 'intact-interactors',
     name: 'Intact',
     cat_id: '1',
-    url:
-      '/intact/pages/interactions/interactions.xhtml?query=£{id}&amp;filter=ac'
+    url: '/intact/pages/interactions/interactions.xhtml?query=£{id}&amp;filter=ac'
   },
   '145': {
     str_id: 'intact-interactions',
     name: 'Intact',
     cat_id: '1',
-    url:
-      'https://www.ebi.ac.uk//intact/pages/interactions/interactions.xhtml?query=£{id}&amp;filter=ac'
+    url: 'https://www.ebi.ac.uk//intact/pages/interactions/interactions.xhtml?query=£{id}&amp;filter=ac'
   },
   '146': {
     str_id: 'intact-experiments',
     name: 'Intact',
     cat_id: '1',
-    url:
-      'https://www.ebi.ac.uk/intact/pages/details/details.xhtml?experimentAc=£{id}'
+    url: 'https://www.ebi.ac.uk/intact/pages/details/details.xhtml?experimentAc=£{id}'
   },
   '147': {
     str_id: 'intact-complexes',
@@ -116,22 +113,19 @@ var XrefConf = {
     str_id: 'nrnl2',
     name: 'nrnl2',
     cat_id: '1',
-    url:
-      'https://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=nrnl2;id=£{id};format=nrl2'
+    url: 'https://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=nrnl2;id=£{id};format=nrl2'
   },
   '14': {
     str_id: 'nrnl1',
     name: 'nrnl1',
     cat_id: '1',
-    url:
-      'https://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=nrnl1;id=£{id};format=nrl1'
+    url: 'https://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=nrnl1;id=£{id};format=nrl1'
   },
   '16': {
     str_id: 'wormbaseparasite',
     name: 'W.Parasite',
     cat_id: '2',
-    url:
-      'https://parasite.wormbase.org/Multi/Search/Results?species=all;idx=;q=£{id};site=ensemblunit'
+    url: 'https://parasite.wormbase.org/Multi/Search/Results?species=all;idx=;q=£{id};site=ensemblunit'
   },
   '17': {
     str_id: 'atlas-genes',
@@ -143,8 +137,7 @@ var XrefConf = {
     str_id: 'nrpl2',
     name: 'nrpl2',
     cat_id: '1',
-    url:
-      'https://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=nrpl2;id=£{id};format=nrl2'
+    url: 'https://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=nrpl2;id=£{id};format=nrl2'
   },
   '19': {
     str_id: 'atlas-genes-differential',
@@ -168,8 +161,7 @@ var XrefConf = {
     str_id: 'nrpl1',
     name: 'nrpl1',
     cat_id: '1',
-    url:
-      'https://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=nrpl1;id=£{id};format=nrl1'
+    url: 'https://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=nrpl1;id=£{id};format=nrl1'
   },
   '23': {
     str_id: 'biosamples',
@@ -427,15 +419,13 @@ var XrefConf = {
     str_id: 'ols',
     name: 'OLS',
     cat_id: '1',
-    url:
-      'https://www.ebi.ac.uk/ols/ontologies/CMO/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2F£{id}'
+    url: 'https://www.ebi.ac.uk/ols/ontologies/CMO/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2F£{id}'
   },
   '72': {
     str_id: 'patentfamilies',
     name: 'Patent',
     cat_id: '1',
-    url:
-      'https://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=patent_equivalents;id=£{id}'
+    url: 'https://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=patent_equivalents;id=£{id}'
   },
   '73': {
     str_id: 'pdbechem',
@@ -465,8 +455,7 @@ var XrefConf = {
     str_id: 'kegg',
     name: 'KEGG',
     cat_id: '1',
-    url:
-      'https://www.genome.jp/dbget-bin/www_bfind_sub?mode=bfind&max_hit=1&dbkey=alldb&keywords=£{id}'
+    url: 'https://www.genome.jp/dbget-bin/www_bfind_sub?mode=bfind&max_hit=1&dbkey=alldb&keywords=£{id}'
   },
   '78': {
     str_id: 'refseq',
@@ -592,8 +581,7 @@ var XrefConf = {
     str_id: 'prodom',
     name: 'Prodom',
     cat_id: '1',
-    url:
-      'http://prodom.prabi.fr/prodom/current/cgi-bin/request.pl?question=SPTR&query=£{id}'
+    url: 'http://prodom.prabi.fr/prodom/current/cgi-bin/request.pl?question=SPTR&query=£{id}'
   },
   '102': {
     str_id: 'smart',
@@ -647,8 +635,7 @@ var XrefConf = {
     str_id: 'snopy',
     name: 'snOPY',
     cat_id: '2',
-    url:
-      'http://snoopy.med.miyazaki-u.ac.jp/snorna_db.cgi?mode=sno_info&id=£{id}'
+    url: 'http://snoopy.med.miyazaki-u.ac.jp/snorna_db.cgi?mode=sno_info&id=£{id}'
   },
   '117': {
     str_id: 'ecocyc',
@@ -732,8 +719,7 @@ var XrefConf = {
     str_id: 'vega',
     name: 'Vega',
     cat_id: '1',
-    url:
-      'http://vega.archive.ensembl.org/Multi/Search/Results?q=£{id};site=vega'
+    url: 'http://vega.archive.ensembl.org/Multi/Search/Results?q=£{id};site=vega'
   },
   '132': {
     str_id: 'mgi',
@@ -805,8 +791,7 @@ var XrefConf = {
     str_id: 'bkms-react',
     name: 'BKMS-REACT',
     cat_id: '5',
-    url:
-      'http://bkms-react.tu-bs.de/index.php?booleans[]=1&categories[]=18&variants[]=1&ssq=true&l=500&searchterms[]=£{id}'
+    url: 'http://bkms-react.tu-bs.de/index.php?booleans[]=1&categories[]=18&variants[]=1&ssq=true&l=500&searchterms[]=£{id}'
   }
 }
 

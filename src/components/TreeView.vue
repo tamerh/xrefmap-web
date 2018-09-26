@@ -11,39 +11,35 @@
 
 <script>
 export default {
-  name: 'tree-view',
-  props: {
-    sel_sub_res: {
-      type: Object,
-      required: true
-    },
-    parent_sub_res: {
-        type: Object
-    },
-    xref_conf: {
-        type: Object,
-        required: true
-      },
-      app_conf: {
-          type: Object,
-          required: true
-        }
-  },
-  data(){
-        return {
-        }
-    },
-    methods: {
-    }
-}
+	name: 'tree-view',
+	props: {
+		sel_sub_res: {
+			type: Object,
+			required: true,
+		},
+		parent_sub_res: {
+			type: Object,
+		},
+		xref_conf: {
+			type: Object,
+			required: true,
+		},
+		app_conf: {
+			type: Object,
+			required: true,
+		},
+	},
+	data() {
+		return {};
+	},
+	methods: {},
+};
 </script>
 
 <style scoped>
-
-a[target^="_blank"]:after {
-  /** content: url(http://upload.wikimedia.org/wikipedia/commons/6/64/Icon_External_Link.png);**/
-  content: "" url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAVklEQVR4Xn3PgQkAMQhDUXfqTu7kTtkpd5RA8AInfArtQ2iRXFWT2QedAfttj2FsPIOE1eCOlEuoWWjgzYaB/IkeGOrxXhqB+uA9Bfcm0lAZuh+YIeAD+cAqSz4kCMUAAAAASUVORK5CYII=); 
-  margin: 0 0 0 1px;
+a[target^='_blank']:after {
+	/** content: url(http://upload.wikimedia.org/wikipedia/commons/6/64/Icon_External_Link.png);**/
+	content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAVklEQVR4Xn3PgQkAMQhDUXfqTu7kTtkpd5RA8AInfArtQ2iRXFWT2QedAfttj2FsPIOE1eCOlEuoWWjgzYaB/IkeGOrxXhqB+uA9Bfcm0lAZuh+YIeAD+cAqSz4kCMUAAAAASUVORK5CYII=);
+	margin: 0 0 0 1px;
 }
-
 </style>

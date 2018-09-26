@@ -77,29 +77,29 @@
 
 <script>
 export default {
-  name: 'Settings',
-  props: {
-      settingsActive: {
-      type: Boolean,
-      required:true
-    },
-    app_conf: {
-        type: Object,
-        required: true
-    }
-  },
-  data(){
-        return {
-            perPageResult:12
-        }
-    },
-    methods: {
-        apply: function(){
-            this.$emit('apply-settings');
-            this.$emit('close-settings');
-        }
-    }
-}
+	name: 'Settings',
+	props: {
+		settingsActive: {
+			type: Boolean,
+			required: true,
+		},
+		app_conf: {
+			type: Object,
+			required: true,
+		},
+	},
+	data() {
+		return {
+			perPageResult: 12,
+		};
+	},
+	methods: {
+		apply: function() {
+			this.$emit('apply-settings');
+			this.$emit('close-settings');
+		},
+	},
+};
 </script>
 
 <style scoped>
