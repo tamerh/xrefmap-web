@@ -29,8 +29,8 @@
     </div>   
    <div  :class="{'navbar-menu':true,'is-active':burgerBarActive}" style="margin-right:-0.5rem">
    <div class="navbar-end">
-          <a class="navbar-item" @click="aboutActive=true">About</a>
-          <a class="navbar-item" @click="settingsActive=true">Settings</a>
+          <a class="navbar-item" @click="goToAbout">About</a>
+          <a class="navbar-item" @click="goToSettings">Settings</a>
 <!--           <a class="navbar-item" @click="apiActive=true">API</a> -->
           
    </div>
@@ -54,7 +54,7 @@
 						<div class="control has-icons-left has-icons-right">
 							<p class="control is-expanded">
 							 <input class="input is-large" type="search" :placeholder="searchPlaceHolder" 
-	                    v-model="searchTerm" v-on:keyup.enter="search" @blur="showExample=true" @keyup="searchKeyUp"  maxlength="300"/>
+	                    v-model="searchTerm" v-on:keyup.enter="search" @blur="showExample=true" @keyup="searchKeyUp"  maxlength="300" autofocus/>
 							<span class="icon is-medium is-left"><i class="fa fa-search"></i></span>
 							</p>
 					  </div>
@@ -142,21 +142,21 @@
 
 			</div>		
 		</div>
-		
-		
+	
 		<about :aboutActive="aboutActive" v-on:close-about="aboutActive=false"/>
 		<api :apiActive="apiActive" v-on:close-api="apiActive=false"/>
-		<settings :settingsActive="settingsActive" :app_conf="$root.$data.app_conf" 
-		           v-on:close-settings="settingsActive=false" v-on:apply-settings="applySettings()"/>
+		<settings :settingsActive="settingsActive" :app_conf="app_conf" :xref_conf="xref_conf" 
+		           v-on:apply-settings="applySettings()"/>
 		
-		<div  v-for="(sub_res,index) in $root.$data.model.all_sub_results" :class="resultDivClass(index)">
+		<div  v-for="(sub_res,index) in app_model.all_sub_results" :class="resultDivClass(index)">
 		  <div class="resultContainer container is-fullhd">
-					<box-view :mobile="mobile" :sub_res="sub_res" :xref_conf="$root.$data.xref_conf" :app_conf="$root.$data.app_conf"></box-view>
+					<box-view :mobile="mobile" :sub_res="sub_res" :xref_conf="xref_conf" :app_conf="app_conf" :app_model="app_model" ></box-view>
 		  </div>	 
 		</div>
 
 		<notifications group="xrefmap" position="top center" classes="notification is-warning"/>
 		<notifications group="error" position="top center" classes="notification is-danger"/>
+		<notifications group="success" position="top center" classes="notification is-success"/>
 
 </main>
 
@@ -179,6 +179,20 @@ import BoxView from './components/BoxView.vue';
 
 export default {
 	name: 'App',
+		props: {
+		app_model: {
+			type: Object,
+			required: true,
+		},
+		xref_conf: {
+			type: Object,
+			required: true,
+		},
+		app_conf: {
+			type: Object,
+			required: true,
+		}
+	},
 	components: {
 		'box-view': BoxView,
 		about: About,
@@ -206,21 +220,66 @@ export default {
 	methods: {
 		goToMain: function() {
 			this.searchTerm = '';
+			this.settingsActive=false;
+			this.aboutActive= false;
 			this.mainPageActive = true;
-			this.$root.$data.model.all_sub_results = [];
+			this.app_model.all_sub_results = [];
 			history.pushState('', 'page', './?m');
 		},
+		goToAbout: function() {
+			this.searchTerm = '';
+			this.mainPageActive = false;
+			this.settingsActive=false;
+			this.aboutActive= true;
+			this.app_model.all_sub_results = [];
+			history.pushState('', 'page', './?a');
+		},
+		goToSettings: function() {
+			this.searchTerm = '';
+			this.mainPageActive = false;
+			this.aboutActive= false;
+			this.settingsActive=true;
+			this.app_model.all_sub_results = [];
+			history.pushState('', 'page', './?s');
+		},
+
+    resultReady: function(status){
+
+     switch (status) {
+			 case -1:
+				this.$notify({
+					group: 'error',
+					title: '',
+					text: 'Something went wrong. Please try again later.',
+				});		 
+				break;
+		  case 0:
+				this.$notify({
+					group: 'xrefmap',
+					title: '',
+					text: 'No result found.',
+				});		 
+				break;
+			 default:
+				 break;
+		 }
+
+		} ,
 		search: function() {
 			if (this.validQuery()) {
 				history.pushState('', 'page', './?' + encodeURIComponent(this.searchTerm));
-				this.$root.$data.fetcher.search(this.searchTerm, this.processResults.bind(this), null);
+				
+				this.app_model.search(this.searchTerm);
+
 				this.mainPageActive = false;
+				this.settingsActive=false;
+			  this.aboutActive= false;
 				this.$refs.searchbox.blur();
 			}
 		},
 		searchNoHistory: function() {
 			if (this.validQuery()) {
-				this.$root.$data.fetcher.search(this.searchTerm, this.processResults.bind(this), null);
+				this.app_model.search(this.searchTerm);
 				this.mainPageActive = false;
 			}
 		},
@@ -237,28 +296,6 @@ export default {
 				return false;
 			}
 			return true;
-		},
-		processResults: function(data_results, callback_params, fail) {
-			if (fail) {
-				this.$notify({
-					group: 'error',
-					title: '',
-					text: 'Something went wrong. Please try again later.',
-				});
-				return;
-			}
-
-			if (data_results == null || data_results.length <= 0) {
-				this.$notify({
-					group: 'xrefmap',
-					title: '',
-					text: 'No result found.',
-				});
-				this.$root.$data.model.all_sub_results = [];
-				return;
-			}
-
-			this.$root.$data.model.processResults(data_results, callback_params);
 		},
 		resultDivClass: function(index) {
 			if (index % 2 == 0) {
@@ -279,35 +316,64 @@ export default {
 			if (search.length > 2) {
 				this.searchTerm = decodeURIComponent(search.substring(1, search.length));
 				this.searchNoHistory();
-			} else {
+				this.mainPageActive = false;
+				this.settingsActive=false;
+			  this.aboutActive= false;
+			} else if(search === '?m') {
 				this.searchTerm = '';
-				this.$root.$data.model.all_sub_results = [];
+				this.app_model.all_sub_results = [];
 				this.mainPageActive = true;
+				this.settingsActive=false;
+			  this.aboutActive= false;
+			}else if(search === '?a'){
+        this.searchTerm = '';
+				this.app_model.all_sub_results = [];
+				this.mainPageActive = false;
+				this.settingsActive=false;
+			  this.aboutActive= true;
+			}else if(search === '?s'){
+        this.searchTerm = '';
+				this.app_model.all_sub_results = [];
+				this.mainPageActive = false;
+				this.settingsActive=true;
+			  this.aboutActive= false;
 			}
 		},
 		applySettings: function() {
-			let new_page_value = parseInt(this.$root.$data.app_conf.page_size_new);
+			let new_page_value = parseInt(this.app_conf.page_size_new);
 
-			if (new_page_value != this.$root.$data.app_conf.page_size) {
-				this.$root.$data.app_conf.page_size = new_page_value;
-				this.$root.$data.model.resetPaging();
+			if (new_page_value != this.app_conf.page_size) {
+				this.app_conf.page_size = new_page_value;
+				this.app_model.resetPaging();
 			}
+
+			//if(this.app_conf.global_filter_datasets !== this.app_conf.global_filter_datasets_new){
+			 this.app_conf.global_filter_datasets=this.app_conf.global_filter_datasets_new;
+			 this.app_model.setGlobHasFilter(this.app_conf.global_filter_datasets && this.app_conf.global_filter_datasets.length>0);
+			//}
 
 			let colorChanged = false;
 
-			if (this.$root.$data.app_conf.box_color_new !== this.$root.$data.app_conf.box_color) {
-				this.$root.$data.app_conf.box_color = this.$root.$data.app_conf.box_color_new;
+			if (this.app_conf.box_color_new !== this.app_conf.box_color) {
+				this.app_conf.box_color = this.app_conf.box_color_new;
 				colorChanged = true;
 			}
 
-			if (this.$root.$data.app_conf.selected_box_color_new !== this.$root.$data.app_conf.selected_box_color) {
-				this.$root.$data.app_conf.selected_box_color = this.$root.$data.app_conf.selected_box_color_new;
+			if (this.app_conf.selected_box_color_new !== this.app_conf.selected_box_color) {
+				this.app_conf.selected_box_color = this.app_conf.selected_box_color_new;
 				colorChanged = true;
 			}
 
 			if (colorChanged) {
-				this.$root.$data.model.resetBoxColors();
+				this.app_model.resetBoxColors();
 			}
+
+			this.$notify({
+					group: 'success',
+					title: '',
+					text: 'Settings applied.',
+				});
+
 		},
 		exampleQuery: function(query) {
 			this.searchTerm = query;
@@ -315,20 +381,20 @@ export default {
 		},
 	},
 	mounted() {
-		this.search();
+		//this.search();
 		window.addEventListener('popstate', this.popStateChange);
 
 		//TODO workaround better to use window resize listener to handle this.
 		if (window.innerWidth < 500) {
 			this.topSearchBoxSize = 15;
-			this.$root.$data.app_conf.page_size = 9;
-			this.$root.$data.app_conf.page_size_new = 9;
+			this.app_conf.page_size = 9;
+			this.app_conf.page_size_new = 9;
 			this.searchPlaceHolder = 'Search';
 			this.mobile = true;
 		} else if (window.innerWidth <= 1500) {
-			this.topSearchBoxSize = 40;
-			this.$root.$data.app_conf.page_size = 18;
-			this.$root.$data.app_conf.page_size_new = 18;
+			this.topSearchBoxSize = 35;
+			this.app_conf.page_size = 18;
+			this.app_conf.page_size_new = 18;
 		}
 	},
 	beforeMount() {
@@ -338,6 +404,10 @@ export default {
 			this.searchTerm = decodeURIComponent(search.substring(1, search.length));
 			this.searchNoHistory();
 		}
+
+		//set this app to model for event handlings
+		this.app_model.setAppComp(this);
+
 	},
 };
 </script>

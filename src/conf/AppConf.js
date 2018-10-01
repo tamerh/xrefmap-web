@@ -4,6 +4,9 @@ var AppConf = {
   page_size_new: 36,
   server_result_page_size: 200,
 
+  //global_filter_datasets: [{id:6,name:"Taxonomy"}],
+  global_filter_datasets: [],
+  global_filter_datasets_new:[],
   box_color: '#ffe4c4', //bisque
   box_color_new: '#ffe4c4',
   selected_box_color: '#afeeee', //paletturquise

@@ -14,7 +14,7 @@ var XrefConf = {
   },
   '2': {
     str_id: 'ensemblgenomes',
-    name: 'Ensembl',
+    name: 'EnsemblG',
     cat_id: '1',
     url: 'http://ensemblgenomes.org/search/eg/£{id}'
   },
@@ -393,7 +393,7 @@ var XrefConf = {
   },
   '67': {
     str_id: 'biosamples-groups',
-    name: 'Biosamples',
+    name: 'BiosamplesGroup',
     cat_id: '1',
     url: 'https://www.ebi.ac.uk/biosamples/samples/£{id}'
   },

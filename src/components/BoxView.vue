@@ -2,7 +2,7 @@
 <div :class="{'resultBox':!mobile,'resultBoxFirst': !parent_sub_res }">
 
 			<div class="legend">			
-		       <template v-if="sub_res.showResults"> &nbsp; {{ sub_res.count.toLocaleString()}} Results for </template>
+		       <template v-if="sub_res.showResults && sub_res.count>0"> &nbsp; {{ sub_res.count.toLocaleString()}} Results for </template>
 		        <a  :href='xref_conf[""+sub_res.domain_id].url.replace("£{id}",sub_res.identifier)' target='_blank'>{{ xref_conf[""+sub_res.domain_id+""].name}} {{ sub_res.identifier}} {{ sub_res.expandedQuery }}</a>
 <!-- 		        <a :href='xref_conf[""+sub_res.domain_id].url.replace("£{id}",sub_res.identifier)' target='_blank'><i class="fas fa-external-link-alt fa-1x"></i></a>  -->
 		        <a  class="actionIcon icon" title="Remove" v-show="sub_res.depth>0" @click="removeXref(sub_res,parent_sub_res)"><i class="fas fa-trash-alt"></i></a>
@@ -17,6 +17,7 @@
          <div class="xrefs" v-show="sub_res.showResults">
            <div class="allEntryBox">
 			<div :id="'sub_res'+sub_res.counter" class="flex-container">
+				<span v-if="sub_res.count <= 0">No result to display due to the active filters.</span>
 				<div v-for="entry in sub_res.displayEntries" :style="entry.style">
 					<p>
 					{{ xref_conf[""+entry.domain_id+""].name}}
@@ -32,6 +33,7 @@
 					</p>
 				</div>
 		   </div>
+
 			
 			<div class="has-text-centered pagingDiv" v-show="sub_res.maxClientPage > 0"> 
                 <a title="Previous Page" v-show="sub_res.clientPage > 0" @click="previousPage(sub_res)"><i class="fas fa-arrow-left"></i></a>
@@ -67,7 +69,7 @@
 		
 		<transition-group name="list" tag="div">
 		<div v-for="(sel_sub_res ,index) in sub_res.selectedXrefs" style="margin-top:10px" :key="sel_sub_res.identifier" >
-			<box-view :mobile="mobile" :parent_sub_res="sub_res" :sub_res="sel_sub_res" :xref_conf="$root.$data.xref_conf" :app_conf="$root.$data.app_conf"></box-view>   
+			<box-view :mobile="mobile" :parent_sub_res="sub_res" :sub_res="sel_sub_res" :xref_conf="xref_conf" :app_conf="app_conf" :app_model="app_model"></box-view>   
 		</div>
 	
 		</transition-group>
@@ -80,10 +82,10 @@
 			  <div class="modal-background" @click="sub_res.treeModal=false"></div>
 			  <div class="modal-content box"> 
 			  <p><strong>Summary view</strong></p>
-	    <p class="tree"> <a  :href='$root.$data.xref_conf[""+sub_res.domain_id].url.replace("£{id}",sub_res.identifier)' target='_blank'>{{ $root.$data.xref_conf[""+sub_res.domain_id+""].name}} {{ sub_res.identifier}}</a></p>	
+	    <p class="tree"> <a  :href='xref_conf[""+sub_res.domain_id].url.replace("£{id}",sub_res.identifier)' target='_blank'>{{ xref_conf[""+sub_res.domain_id+""].name}} {{ sub_res.identifier}}</a></p>	
 	    <ul class="tree">
 	         <template v-for="sel_sub_res in sub_res.selectedXrefs">
-		     	<tree-view :sel_sub_res="sel_sub_res" :xref_conf="$root.$data.xref_conf" :app_conf="$root.$data.app_conf"></tree-view>
+		     	<tree-view :sel_sub_res="sel_sub_res" :xref_conf="xref_conf" :app_conf="app_conf"></tree-view>
 		     </template>
 		</ul>
 		</div>
@@ -119,6 +121,10 @@ export default {
 			type: Object,
 			required: true,
 		},
+		app_model: {
+			type: Object,
+			required: true,
+		},
 		mobile: {
 			type: Boolean,
 			required: true,
@@ -135,7 +141,7 @@ export default {
 	},
 	methods: {
 		processSelectedXref: function(results, callback_params) {
-			this.lastSelectedRes = this.$root.$data.model.processSelectedXref(results, callback_params);
+			this.lastSelectedRes = this.app_model.processSelectedXref(results, callback_params);
 			this.xrefSelected = true;
 		},
 		selectXref: function(id, domain_id, entry_id, entry_domain_id, sub_res, entry) {
@@ -155,7 +161,7 @@ export default {
 				return;
 			}
 
-			this.$root.$data.model.processFilteredResults(data_results, sub_result, false);
+			this.app_model.processFilteredResults(data_results, sub_result, false);
 		},
 		processFilteredResults4Paging: function(data_results, sub_result, callback_params, fail) {
 			sub_result.selectedXrefs = [];
@@ -170,7 +176,7 @@ export default {
 				return;
 			}
 
-			this.$root.$data.model.processFilteredResults(data_results, sub_result, true);
+			this.app_model.processFilteredResults(data_results, sub_result, true);
 			sub_result.displayEntries = sub_result.entries.slice(callback_params[0], callback_params[1]);
 		},
 		applyFilter: function(sub_result) {
@@ -196,8 +202,8 @@ export default {
 				callback_params
 			);
 		},
-		processPaginResults: function(results, callback_params) {
-			this.$root.$data.model.processPaginResults(results, callback_params[0]);
+		processPagingResults: function(results, callback_params) {
+			this.app_model.processPagingResults(results, callback_params[0]);
 			callback_params[0].displayEntries = callback_params[0].entries.slice(
 				callback_params[1],
 				callback_params[2]
@@ -228,7 +234,7 @@ export default {
 						sub_result.domain_id,
 						sub_result.serverPage,
 						sub_result.maxServerPage,
-						this.processPaginResults.bind(this),
+						this.processPagingResults.bind(this),
 						callback_params
 					);
 				}

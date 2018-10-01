@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import Notifications from 'vue-notification'
 import VueScrollTo from 'vue-scrollto'
+import Multiselect from 'vue-multiselect'
+
 
 Vue.config.productionTip = false
 
@@ -26,6 +28,9 @@ Vue.use(VueScrollTo, {
     y: true
 })
 
+Vue.component('multiselect', Multiselect)
+
+
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
@@ -40,11 +45,11 @@ new Vue({
     components: {
         App
     },
-    template: '<App/>',
+    template: '<App :xref_conf="this.xref_conf" :app_conf="this.app_conf" :app_model="this.model"/>',
     beforeMount() {
         this.fetcher = new Fetch()
         this.xref_conf = XrefConf;
         this.app_conf = AppConf;
-        this.model = new Model(this.xref_conf, this.app_conf);
+        this.model = new Model(this.fetcher, this.xref_conf, this.app_conf);
     }
 })
