@@ -163,7 +163,7 @@
 <footer>
   <div class="content has-text-left is-size-6">
     <p>
-      Last update date: September 2018
+      Last update date: 2 October 2018
     </p>
   </div>
 </footer>

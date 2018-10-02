@@ -4,7 +4,8 @@
 	    <div class="content">
 			<p class="has-text-centered is-size-4 has-text-success">About</p>
 		    <p>
-		    XrefMap is a prototype bioinformatics tool for cross reference retrieval and navigation. It covers around 2.6 billions records (identifiers, accessions, gene symbols, species name...) with around 17.8 billions cross reference records.
+		    XrefMap is a prototype bioinformatics tool for cross reference retrieval and navigation. It covers around 2.6 billions records (identifiers, accessions, gene symbols, species name...) with their more than 16 billions cross reference records.
+			  Data generated from EBI Search <a href="https://www.ebi.ac.uk/ebisearch/overview.ebi/statistics" target="_blank">datasets</a>. Different public datasets can be also added .
 				</p>
 		<p>
 		It uses <a href="http://www.mapdb.org/" target="_blank">MapDB</a> and <a href="https://en.wikipedia.org/wiki/Lightning_Memory-Mapped_Database" target="_blank">LMDB</a> databases for fast bulk inserts and read. 
