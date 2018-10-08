@@ -473,7 +473,7 @@ var XrefConf = {
     str_id: 'patric',
     name: 'PATRIC',
     cat_id: '1',
-    url: 'https://www.patricbrc.org/view/Feature/£{id}'
+    url:'https://www.patricbrc.org/search/?keyword(%22£{id}%22)'
   },
   '81': {
     str_id: 'orthodb',
@@ -503,7 +503,7 @@ var XrefConf = {
     str_id: 'prosite',
     name: 'PROSITE',
     cat_id: '4',
-    url: 'https://prosite.expasy.org/doc/PS00301£{id}'
+    url: 'https://prosite.expasy.org/doc/£{id}'
   },
   '87': {
     str_id: 'tigrfams',
@@ -735,7 +735,7 @@ var XrefConf = {
   },
   '134': {
     str_id: 'kw',
-    name: 'Uniprot',
+    name: 'UniprotKW',
     cat_id: '6',
     url: 'https://www.uniprot.org/keywords/£{id}'
   },
@@ -792,6 +792,12 @@ var XrefConf = {
     name: 'BKMS-REACT',
     cat_id: '5',
     url: 'http://bkms-react.tu-bs.de/index.php?booleans[]=1&categories[]=18&variants[]=1&ssq=true&l=500&searchterms[]=£{id}'
+  },
+  '153': {
+    str_id: 'vgnc',
+    name: 'VGNC',
+    cat_id: '1',
+    url: 'https://vertebrate.genenames.org/data/gene-symbol-report/#!/vgnc_id/£{id}'
   }
 }
 

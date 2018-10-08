@@ -74,9 +74,9 @@ export default class XrefModel {
         let domain_conf = this.xref_conf[result.domain_id];
 
         if (domain_conf.trim_after) {
-            result.url = domain_conf.url.replace("£{id}", result.identifier.substring(0, result.identifier.indexOf(domain_conf.trim_after)));
+            result.url = domain_conf.url.replace("£{id}", encodeURIComponent(result.identifier.substring(0, result.identifier.indexOf(domain_conf.trim_after))));
         } else {
-            result.url = domain_conf.url.replace("£{id}", result.identifier);
+            result.url = domain_conf.url.replace("£{id}", encodeURIComponent(result.identifier));
         }
 
         this.preparePaging(result);
@@ -152,9 +152,9 @@ export default class XrefModel {
 
             let domain_conf = this.xref_conf[entry.domain_id];
             if (domain_conf.trim_after) {
-                entry.url = domain_conf.url.replace("£{id}", entry.xref_id.substring(0, entry.xref_id.indexOf(domain_conf.trim_after)));
+                entry.url = domain_conf.url.replace("£{id}", encodeURIComponent(entry.xref_id.substring(0, entry.xref_id.indexOf(domain_conf.trim_after))));
             } else {
-                entry.url = domain_conf.url.replace("£{id}", entry.xref_id);
+                entry.url = domain_conf.url.replace("£{id}", encodeURIComponent(entry.xref_id));
             }
 
             if (entry.xref_id.length <= 12) {

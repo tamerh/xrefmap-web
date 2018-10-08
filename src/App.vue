@@ -138,7 +138,18 @@
 			     <a @click="exampleQuery('0000-0001-5822-9201')">ORCID identifier</a>  
 			  </p>
 			</div>
-			
+
+			<div class="field is-grouped is-grouped-centered">
+			  <p class="control">
+			     <a @click="exampleQuery('FIG|1348657.5.PEG.3738')">PATRIC identifier</a>  
+			  </p>
+			</div>
+
+			<div class="field is-grouped is-grouped-centered">
+			  <p class="control">
+			     <a @click="exampleQuery('VGNC:10496')">VGNC identifier</a>  
+			  </p>
+			</div>
 
 			</div>		
 		</div>
@@ -163,7 +174,7 @@
 <footer>
   <div class="content has-text-left is-size-6">
     <p>
-      Last update date: 2 October 2018
+      Last update date: 8 October 2018
     </p>
   </div>
 </footer>
