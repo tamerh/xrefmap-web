@@ -30,6 +30,12 @@ var XrefConf = {
     cat_id: '1',
     url: 'http://pfam.xfam.org/family/£{id}'
   },
+  '5': {
+    str_id: 'atlas-genes',
+    name: 'Expression',
+    cat_id: '2',
+    url: 'https://www.ebi.ac.uk/gxa/genes/£{id}'
+  },
   '144': {
     str_id: 'intact-interactors',
     name: 'Intact',
